@@ -1,6 +1,6 @@
-# Enshrouded Dedicated Server Configuration Validator
+# Enshrouded Config Editor
 
-This is a web tool for validating the configuration file of an Enshrouded Dedicated Server.
+This is a web tool for editing and validating the configuration file for Enshrouded dedicated servers.
 
 ## Features
 
