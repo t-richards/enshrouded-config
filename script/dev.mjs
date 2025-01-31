@@ -26,7 +26,7 @@ async function buildMain() {
     const opts = {
         port: 4000,
         servedir: 'dist'
-    } 
+    }
     await ctx.serve(opts)
     console.log('Running server on http://localhost:4000/')
 }
