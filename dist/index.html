@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Enshrouded Dedicated Server Configuration</title>
+  <link rel="stylesheet" href="index.css" />
+  <link rel="stylesheet" href="monaco-editor.css" />
+</head>
+
+<body class="container">
+  <div class="instructions">
+    <h1>Enshrouded Dedicated Server Configuration</h1>
+    <p>Use this tool to create and/or validate your configuration file for your Enshrouded dedicated server.
+    </p>
+
+    <h2>Bring your own</h2>
+    <ul>
+      <li>Paste your <code>enshrouded_server.json</code> file into the editor.</li>
+      <li>Look for the colorful squiggly underlines that indicate warnings or errors.</li>
+      <li>Press <kbd>F8</kbd> to navigate through problems.</li>
+    </ul>
+
+    <h2>Start fresh</h2>
+    <ol>
+      <li>The editor on this page contains the current default configuration.</li>
+      <li>Hover over any setting to see a description.</li>
+      <li>Press <kbd>F1</kbd> for the full editor command palette.</li>
+    </ol>
+
+    <h2>Security &amp; privacy</h2>
+    <ul>
+      <li>Validation happens entirely in your browser.</li>
+      <li>Config files are never stored or sent to a server for any reason.</li>
+      <li>No ads, tracking, or similar nonsense.</li>
+    </ul>
+
+    <h2>Open source</h2>
+    <p>
+      This tool is open source software. You can find it on <a
+        href="https://github.com/t-richards/enshrouded-config">GitHub</a>.
+    </p>
+  </div>
+
+  <div id="editor" class="editor"></div>
+
+  <script type="importmap">
+    {
+      "imports": {
+        "monaco-editor": "./monaco-editor.js"
+      }
+    }
+  </script>
+  <script src="index.js" type="module"></script>
+</body>
+
+</html>

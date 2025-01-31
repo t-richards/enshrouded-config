@@ -1,0 +1,1237 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+        "name": {
+            "type": "string",
+            "markdownDescription": "#### Server Name\n\n---\n\nThe name of the dedicated server as it appears in the server list.\n\n - Default: `\"Enshrouded Server\"`",
+            "default": "Enshrouded Server"
+        },
+        "password": {
+            "type": "string",
+            "deprecated": true,
+            "markdownDescription": "#### Server Password (DEPRECATED)\n\n---\n\n⚠️ Do not use this setting, as it may be removed in a future update.\n\nPrior to the release of server roles, servers had one global password.\n\nInstead, set role-specific passwords in the `userGroups` section.",
+            "default": ""
+        },
+        "saveDirectory": {
+            "type": "string",
+            "markdownDescription": "#### Save Directory\n\n---\n\nDirectory path where the world save files are stored.\n\nDefault: `\"./savegame\"`",
+            "default": "./savegame"
+        },
+        "logDirectory": {
+            "type": "string",
+            "markdownDescription": "#### Log Directory\n\n---\n\nDirectory path where log files are stored.\n\nDefault: `\"./logs\"`",
+            "default": "./logs"
+        },
+        "ip": {
+            "type": "string",
+            "markdownDescription": "#### IP Address\n\n---\n\nIP address the server binds to. `0.0.0.0` binds to all available interfaces.\n\nDefault: `\"0.0.0.0\"`",
+            "default": "0.0.0.0",
+            "format": "ipv4"
+        },
+        "queryPort": {
+            "type": "integer",
+            "markdownDescription": "#### Query Port\n\n---\n\nPort used for server queries.\n\n- Minimum: `1`\n\n - Maximum: `65535`\n\nDefault: `15637`",
+            "default": 15637,
+            "minimum": 1,
+            "maximum": 65535
+        },
+        "slotCount": {
+            "type": "integer",
+            "markdownDescription": "#### Slot Count\n\n---\n\nMaximum number of player slots.\n\n- Minimum: `1`\n\n - Maximum: `16`\n\nDefault: `16`",
+            "default": 16,
+            "minimum": 1,
+            "maximum": 16
+        },
+        "voiceChatMode": {
+            "type": "string",
+            "markdownDescription": "#### Voice Chat Mode\n\n---\n\nMode of voice chat communication.\n\nOptions:\n\n - `\"Proximity\"` - Only players near each other can hear voice chat.\n\n - `\"Global\"` - All players can hear voice chat regardless of distance.\n\nDefault: `\"Proximity\"`\n\nCurrent Setting:",
+            "default": "Proximity",
+            "enum": [
+                "Proximity",
+                "Global"
+            ],
+            "markdownEnumDescriptions": [
+                "Only players near each other can hear voice chat.",
+                "All players can hear voice chat regardless of distance."
+            ]
+        },
+        "enableVoiceChat": {
+            "type": "boolean",
+            "markdownDescription": "#### Voice Chat\n\n---\n\nEnables or disables voice chat.\n\n - Default: `false`",
+            "default": false
+        },
+        "enableTextChat": {
+            "type": "boolean",
+            "markdownDescription": "#### Text Chat\n\n---\n\nEnables or disables text chat.\n\n - Default: `false`",
+            "default": false
+        },
+        "gameSettingsPreset": {
+            "type": "string",
+            "markdownDescription": "#### Predefined Game Difficulty\n\n---\n\nOptions:\n\n - `\"Default\"` - The Default difficulty setting configures all values to default. It is the direct continuation of how Enshrouded was configured up until update 0.7.3.0 and is the recommended setting for first-time players.\n\n - `\"Relaxed\"` - The Relaxed preset reduces the amount of enemies and provides players with more resources and loot. This mode targets players who are most interested in base-building and light-hearted adventuring.\n\n - `\"Hard\"` - The Hard preset increases the amount of enemies and makes them more aggressive to give players a tougher combat experience.\n\n - `\"Survival\"` - The Survival preset is for those who seek some punishment with additional survival mechanics on top of more aggressive enemies.\n\n - `\"Custom\"` - When Custom is selected, it allows custom values in the `gameSettings` section to take effect.\n\n - Default: `\"Default\"`\n\nCurrent Setting:",
+            "default": "Default",
+            "enum": [
+                "Default",
+                "Relaxed",
+                "Hard",
+                "Survival",
+                "Custom"
+            ],
+            "markdownEnumDescriptions": [
+                "Default difficulty setting.",
+                "Fewer enemies and more resources.",
+                "More enemies and tougher combat.",
+                "More enemies and tougher combat plus survival mechanics.",
+                "Customized settings via `gameSettings` section."
+            ]
+        },
+        "gameSettings": {
+            "type": "object",
+            "markdownDescription": "#### Customized Game Settings\n\n---\n\nServer will use these values when the `gameSettingsPreset` is set to `Custom`.",
+            "additionalProperties": false,
+            "properties": {
+                "playerHealthFactor": {
+                    "type": "number",
+                    "markdownDescription": "#### Player Health\n\n---\n\nScales the max health for players.\n\nIn-game, the factor is represented by a percentage.\n\n - Minimum: `0.25`\n\n - Maximum: `4`\n\nDefault: `1`",
+                    "default": 1,
+                    "minimum": 0.25,
+                    "maximum": 4
+                },
+                "playerManaFactor": {
+                    "type": "number",
+                    "markdownDescription": "#### Player Mana\n\n---\n\nScales the max mana for players.\n\nIn-game, the factor is represented by a percentage.\n\n - Minimum: `0.25`\n\n - Maximum: `4`\n\nDefault: `1`",
+                    "default": 1,
+                    "minimum": 0.25,
+                    "maximum": 4
+                },
+                "playerStaminaFactor": {
+                    "type": "number",
+                    "markdownDescription": "#### Player Stamina\n\n---\n\nScales the max stamina for players.\n\nIn-game, the factor is represented by a percentage.\n\n - Minimum: `0.25`\n\n - Maximum: `4`\n\nDefault: `1`",
+                    "default": 1,
+                    "minimum": 0.25,
+                    "maximum": 4
+                },
+                "playerBodyHeatFactor": {
+                    "type": "number",
+                    "markdownDescription": "#### Cold Resistance\n\n---\n\nScales the max amount of available body heat in the player.\n\nThe higher the factor, the longer the player can stay in very cold areas before hypothermia sets in.\n\nOptions:\n\n - Low: `0`\n\n - Default: `1`\n\n - High: `1.5`\n\n - Max: `2`\n\nCurrent Setting:",
+                    "default": 1,
+                    "enum": [
+                        0.5,
+                        1,
+                        1.5,
+                        2
+                    ],
+                    "markdownEnumDescriptions": [
+                        "Low",
+                        "Default",
+                        "High",
+                        "Max"
+                    ]
+                },
+                "enableDurability": {
+                    "type": "boolean",
+                    "markdownDescription": "#### Weapon Durability\n\n---\n\nWhen `false`, weapons don't break anymore.",
+                    "default": true
+                },
+                "enableStarvingDebuff": {
+                    "type": "boolean",
+                    "markdownDescription": "#### Hunger and Starvation\n\n---\n\nWhen `true`, enables hunger and starvation.\n\nDuring starvation, the player loses health periodically until death if no food or drink is consumed.",
+                    "default": false
+                },
+                "foodBuffDurationFactor": {
+                    "type": "number",
+                    "markdownDescription": "#### Food Buff Duration\n\n---\n\nScales food buff durations. In-game, the factor is represented by a percentage.\n\n - Minimum: `0.5`\n\n - Maximum: `2`\n\nDefault: `1`",
+                    "default": 1,
+                    "minimum": 0.5,
+                    "maximum": 2
+                },
+                "fromHungerToStarving": {
+                    "type": "integer",
+                    "markdownDescription": "#### Hungry State Duration\n\n---\n\nThis setting controls the length of the hungry state before the starving sets in.\n\nThe unit is nanoseconds. In-game, the time is displayed in minutes.\n\n - Minimum: `300000000000` (5 minutes)\n\n - Maximum: `1200000000000` (20 minutes)\n\nDefault: `600000000000` (10 minutes)",
+                    "default": 600000000000,
+                    "minimum": 300000000000,
+                    "maximum": 1200000000000
+                },
+                "shroudTimeFactor": {
+                    "type": "number",
+                    "markdownDescription": "#### Shroud Time Duration Modifier\n\n---\n\nScales how long player characters can remain within the Shroud.\n\nIn-game, the factor is represented by a percentage.\n\n - Minimum: `0.5`\n\n - Maximum: `2`\n\nDefault: `1`",
+                    "default": 1,
+                    "minimum": 0.5,
+                    "maximum": 2
+                },
+                "tombstoneMode": {
+                    "type": "string",
+                    "markdownDescription": "#### Tombstone Mode\n\n---\n\nPlayers can either keep or lose all items from their backpack when dying.\n\nLost items are stored in a tombstone and can be recovered there.\n\nOptions:\n\n - `\"AddBackpackMaterials\"` - Only drop materials (default).\n\n - `\"Everything\"` - Drop all backpack contents.\n\n - `\"NoTombstone\"` - Keep all backpack contents. Don't drop a tombstone.\n\nCurrent Setting:",
+                    "default": "AddBackpackMaterials",
+                    "enum": [
+                        "AddBackpackMaterials",
+                        "Everything",
+                        "NoTombstone"
+                    ],
+                    "markdownEnumDescriptions": [
+                        "Only drop materials (default).",
+                        "Drop all backpack contents.",
+                        "Keep all backpack contents. Don't drop a tombstone."
+                    ]
+                },
+                "enableGliderTurbulences": {
+                    "type": "boolean",
+                    "markdownDescription": "#### Glider Turbulence\n\n---\n\nWhen `false`, glider flight will not be affected by air turbulence, just as in previous versions of the game.",
+                    "default": true
+                },
+                "weatherFrequency": {
+                    "type": "string",
+                    "markdownDescription": "#### Weather Frequency\n\n---\n\nThis setting allows defining how often new weather phenomena appear in the game world.\n\nOptions:\n\n - `\"Disabled\"` - No weather changes.\n\n - `\"Rare\"` - Weather changes are rare.\n\n - `\"Normal\"` - Normal weather changes. (Default)\n\n - `\"Often\"` - Frequent weather changes.",
+                    "default": "Normal",
+                    "enum": [
+                        "Disabled",
+                        "Rare",
+                        "Normal",
+                        "Often"
+                    ],
+                    "markdownEnumDescriptions": [
+                        "No weather changes.",
+                        "Weather changes are rare.",
+                        "Normal weather changes.",
+                        "Frequent weather changes."
+                    ]
+                },
+                "miningDamageFactor": {
+                    "type": "number",
+                    "markdownDescription": "#### Mining Effectiveness\n\n---\n\nThis scales mining damage and terraforming.\n\nA higher value means increased terraforming and more yield of resources per hit.\n\nIn-game, the factor is represented by a percentage.\n\n - Minimum: `0.5`\n\n - Maximum: `2`\n\nDefault: `1`",
+                    "default": 1,
+                    "minimum": 0.5,
+                    "maximum": 2
+                },
+                "plantGrowthSpeedFactor": {
+                    "type": "number",
+                    "markdownDescription": "#### Plant Growth Speed\n\n---\n\nScales how quickly plants grow.\n\nIn-game, the factor is represented by a percentage.\n\n - Minimum: `0.25`\n\n - Maximum: `2`\n\nDefault: `1`",
+                    "default": 1,
+                    "minimum": 0.25,
+                    "maximum": 2
+                },
+                "resourceDropStackAmountFactor": {
+                    "type": "number",
+                    "markdownDescription": "#### Resource Gain Modifier\n\n---\n\nScales the amount of materials per loot stack in chests, defeated enemies, etc.\n\nIn-game, the factor is represented by a percentage.\n\n - Minimum: `0.25`\n\n - Maximum: `2`\n\nDefault: `1`",
+                    "default": 1,
+                    "minimum": 0.25,
+                    "maximum": 2
+                },
+                "factoryProductionSpeedFactor": {
+                    "type": "number",
+                    "markdownDescription": "#### Workstation Effectiveness\n\n---\n\nScales the length of production times for workshop items.\n\nIngame, the factor is represented by a percentage.\n\n - Minimum: `0.25`\n\n - Maximum: `2`\n\nDefault: `1`",
+                    "default": 1,
+                    "minimum": 0.25,
+                    "maximum": 2
+                },
+                "perkUpgradeRecyclingFactor": {
+                    "type": "number",
+                    "markdownDescription": "#### Weapon Salvage Modifier\n\n---\n\nScales the amount of Runes that are returned to you when salvaging upgraded weapons.\n\nIn-game, the factor is represented by a percentage.\n\n - Minimum: `0.25`\n\n - Maximum: `2`\n\nDefault: `0.5`",
+                    "default": 0.500000,
+                    "minimum": 0,
+                    "maximum": 1
+                },
+                "perkCostFactor": {
+                    "type": "number",
+                    "markdownDescription": "#### Weapon Upgrade Cost\n\n---\n\nScales the amount of Runes required for upgrading weapons.\n\nIn-game, the factor is represented by a percentage.\n\n - Minimum: `0.25`\n\n - Maximum: `2`\n\nDefault: `1`",
+                    "default": 1,
+                    "minimum": 0.25,
+                    "maximum": 2
+                },
+                "experienceCombatFactor": {
+                    "type": "number",
+                    "markdownDescription": "#### Combat Experience Modifier\n\n---\n\nScales the amount of XP received through combat.\n\nIn-game, the factor is represented by a percentage.\n\n - Minimum: `0.25`\n\n - Maximum: `2`\n\nDefault: `1`",
+                    "default": 1,
+                    "minimum": 0.25,
+                    "maximum": 2
+                },
+                "experienceMiningFactor": {
+                    "type": "number",
+                    "markdownDescription": "#### Mining Experience Modifier\n\n---\n\nScales the amount of XP received by mining resources.\n\nIn-game, the factor is represented by a percentage.\n\n - Minimum: `0.25`\n\n - Maximum: `2`\n\nDefault: `1`",
+                    "default": 1,
+                    "minimum": 0,
+                    "maximum": 2
+                },
+                "experienceExplorationQuestsFactor": {
+                    "type": "number",
+                    "markdownDescription": "#### Exploration Experience Modifier\n\n---\n\nScales the amount of XP received by exploring and completing quests.\n\nIn-game, the factor is represented by a percentage.\n\n - Minimum: `0.25`\n\n - Maximum: `2`\n\nDefault: `1`",
+                    "default": 1,
+                    "minimum": 0.25,
+                    "maximum": 2
+                },
+                "randomSpawnerAmount": {
+                    "type": "string",
+                    "markdownDescription": "#### Enemy Amount\n\n---\n\nThis setting controls the amount of enemies in the world.\n\nOptions:\n\n - `\"Few\"` - Fewer enemies.\n\n - `\"Normal\"` - Normal amount of enemies. (Default)\n\n - `\"Many\"` - More enemies.\n\n - `\"Extreme\"` - A lot of enemies.\n\nCurrent Setting:",
+                    "default": "Normal",
+                    "enum": [
+                        "Few",
+                        "Normal",
+                        "Many",
+                        "Extreme"
+                    ],
+                    "markdownEnumDescriptions": [
+                        "Fewer enemies.",
+                        "Normal amount of enemies.",
+                        "More enemies.",
+                        "A lot of enemies."
+                    ]
+                },
+                "aggroPoolAmount": {
+                    "type": "string",
+                    "markdownDescription": "#### Enemy Aggro Modifier\n\n---\n\nThis setting controls how many enemies are allowed to attack at the same time.\n\nIn-game, the factor is represented by a percentage.\n\nOptions:\n\n - `\"Few\"` - Fewer enemies can attack at the same time.\n\n - `\"Normal\"` - Normal amount of enemies can attack at the same time. (Default)\n\n - `\"Many\"` - More enemies can attack at the same time.\n\n - `\"Extreme\"` - A lot of enemies can attack at the same time.\n\nCurrent Setting:",
+                    "default": "Normal",
+                    "enum": [
+                        "Few",
+                        "Normal",
+                        "Many",
+                        "Extreme"
+                    ],
+                    "markdownEnumDescriptions": [
+                        "Fewer enemies can attack at the same time.",
+                        "Normal amount of enemies can attack at the same time.",
+                        "More enemies can attack at the same time.",
+                        "A lot of enemies can attack at the same time."
+                    ]
+                },
+                "enemyDamageFactor": {
+                    "type": "number",
+                    "markdownDescription": "#### Enemy Damage\n\n---\n\nScales all enemy damage by this value - except for bosses.\n\nIn-game, the factor is represented by a percentage.\n\n - Minimum: `0.25`\n\n - Maximum: `5`\n\nDefault: `1`",
+                    "default": 1,
+                    "minimum": 0.25,
+                    "maximum": 5
+                },
+                "enemyHealthFactor": {
+                    "type": "number",
+                    "markdownDescription": "#### Enemy Health\n\n---\n\nScales all enemy health by this value - except for bosses.\n\nIn-game, the factor is represented by a percentage.\n\n - Minimum: `0.25`\n\n - Maximum: `4`\n\nDefault: `1`",
+                    "default": 1,
+                    "minimum": 0.25,
+                    "maximum": 4
+                },
+                "enemyStaminaFactor": {
+                    "type": "number",
+                    "markdownDescription": "#### Enemy Stun Modifier\n\n---\n\nScales all enemy stamina by this value.\n\nIt will take longer to stun enemies with a higher enemy stamina. This excludes bosses.\n\nIn-game, the factor is represented by a percentage.\n\n - Minimum: `0.25`\n\n - Maximum: `2`\n\nDefault: `1`",
+                    "default": 1,
+                    "minimum": 0.25,
+                    "maximum": 2
+                },
+                "enemyPerceptionRangeFactor": {
+                    "type": "number",
+                    "markdownDescription": "#### Enemy Perception Modifier\n\n---\n\nScales how far enemies can see and hear the player. This excludes bosses.\n\nIn-game, the factor is represented by a percentage.\n\n - Minimum: `0.25`\n\n - Maximum: `2`\n\nDefault: `1`",
+                    "default": 1,
+                    "minimum": 0.25,
+                    "maximum": 2
+                },
+                "bossDamageFactor": {
+                    "type": "number",
+                    "markdownDescription": "#### Boss Damage Modifier\n\n---\n\nThis setting scales the damage of boss attacks.\n\nIn-game, the factor is represented by a percentage.\n\n - Minimum: `0.2`\n\n - Maximum: `5`\n\nDefault: `1`",
+                    "default": 1,
+                    "minimum": 0.2,
+                    "maximum": 5
+                },
+                "bossHealthFactor": {
+                    "type": "number",
+                    "markdownDescription": "#### Boss Health Modifier\n\n---\n\nScales all health of bosses by this value.\n\nIn-game, the factor is represented by a percentage.\n\n - Minimum: `0.2`\n\n - Maximum: `5`\n\nDefault: `1`",
+                    "default": 1,
+                    "minimum": 0.2,
+                    "maximum": 5
+                },
+                "threatBonus": {
+                    "type": "number",
+                    "markdownDescription": "#### Enemy Attack Modifier\n\n---\n\nScales the frequency of enemy attacks. This excludes bosses.\n\nIn-game, the factor is represented by a percentage.\n\n - Minimum: `0.25`\n\n - Maximum: `2`\n\nDefault: `1`",
+                    "default": 1,
+                    "minimum": 0.25,
+                    "maximum": 2
+                },
+                "pacifyAllEnemies": {
+                    "type": "boolean",
+                    "markdownDescription": "#### Pacify Enemies\n\n---\n\nWhen `true`, enemies won't attack the players until they are attacked. This excludes bosses.",
+                    "default": false
+                },
+                "tamingStartleRepercussion": {
+                    "type": "string",
+                    "markdownDescription": "#### Taming Failure Repercussions\n\n---\n\nThis setting allows defining how the game reacts when the player startles the wildlife during taming.\n\nProgress is visualized by hearts in the game.\n\nOptions:\n\n - `\"KeepProgress\"` - Keep all hearts.\n\n - `\"LoseSomeProgress\"` - Lose some hearts.\n\n - `\"LoseAllProgress\"` - Lose all hearts.\n\nCurrent Setting:",
+                    "default": "LoseSomeProgress",
+                    "enum": [
+                        "KeepProgress",
+                        "LoseSomeProgress",
+                        "LoseAllProgress"
+                    ],
+                    "markdownEnumDescriptions": [
+                        "Keep all hearts.",
+                        "Lose some hearts.",
+                        "Lose all hearts."
+                    ]
+                },
+                "dayTimeDuration": {
+                    "type": "integer",
+                    "markdownDescription": "#### Daytime\n\n---\n\nScales the length of daytime. A smaller value equals shorter daytime.\n\nThe unit is nanoseconds. In-game, the time is displayed in minutes.\n\n - Minimum: `120000000000` (2 minutes)\n\n - Maximum: `3600000000000` (60 minutes)\n\nDefault: `1800000000000` (30 minutes)",
+                    "default": 1800000000000,
+                    "minimum": 120000000000,
+                    "maximum": 3600000000000
+                },
+                "nightTimeDuration": {
+                    "type": "integer",
+                    "markdownDescription": "#### Nighttime\n\n---\n\nScales the length of nighttime. A smaller value equals a shorter nighttime.\n\nThe unit is nanoseconds. In-game, the time is displayed in minutes.\n\n - Minimum: `120000000000` (2 minutes)\n\n - Maximum: `3600000000000` (60 minutes)\n\nDefault: `720000000000` (12 minutes)",
+                    "default": 720000000000,
+                    "minimum": 120000000000,
+                    "maximum": 3600000000000
+                }
+            },
+            "required": [
+                "playerHealthFactor",
+                "playerManaFactor",
+                "playerStaminaFactor",
+                "playerBodyHeatFactor",
+                "enableDurability",
+                "enableStarvingDebuff",
+                "foodBuffDurationFactor",
+                "fromHungerToStarving",
+                "shroudTimeFactor",
+                "tombstoneMode",
+                "enableGliderTurbulences",
+                "weatherFrequency",
+                "miningDamageFactor",
+                "plantGrowthSpeedFactor",
+                "resourceDropStackAmountFactor",
+                "factoryProductionSpeedFactor",
+                "perkUpgradeRecyclingFactor",
+                "perkCostFactor",
+                "experienceCombatFactor",
+                "experienceMiningFactor",
+                "experienceExplorationQuestsFactor",
+                "randomSpawnerAmount",
+                "aggroPoolAmount",
+                "enemyDamageFactor",
+                "enemyHealthFactor",
+                "enemyStaminaFactor",
+                "enemyPerceptionRangeFactor",
+                "bossDamageFactor",
+                "bossHealthFactor",
+                "threatBonus",
+                "pacifyAllEnemies",
+                "tamingStartleRepercussion",
+                "dayTimeDuration",
+                "nightTimeDuration"
+            ]
+        },
+        "userGroups": {
+            "type": "array",
+            "markdownDescription": "#### User Groups\n\n---\n\nA list of user groups with their permissions and settings.",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "markdownDescription": "#### Group Name\n\nThe name of the user group.",
+                        "minLength": 1
+                    },
+                    "password": {
+                        "type": "string",
+                        "markdownDescription": "#### Group Password\n\nThe password required to log in as a member of this group."
+                    },
+                    "canKickBan": {
+                        "type": "boolean",
+                        "markdownDescription": "#### Kick/Ban\n\nWhen `true`, users in this group can kick or ban other users.\n\nDefault: `false`",
+                        "default": false
+                    },
+                    "canAccessInventories": {
+                        "type": "boolean",
+                        "markdownDescription": "#### Inventory Access\n\nWhen `true`, users in this group can access chests and other containers.\n\nDefault: `false`",
+                        "default": false
+                    },
+                    "canEditBase": {
+                        "type": "boolean",
+                        "markdownDescription": "#### Base Building\n\nWhen `true`, users in this group can build add/remove blocks, add/remove props, and terraform within build areas.\n\nDefault: `false`",
+                        "default": false
+                    },
+                    "canExtendBase": {
+                        "type": "boolean",
+                        "markdownDescription": "#### Flame Altars\n\nWhen `true`, users in this group can add/remove/upgrade flame altars on the server.\n\nDefault: `false`",
+                        "default": false
+                    },
+                    "reservedSlots": {
+                        "type": "integer",
+                        "markdownDescription": "#### Reserved Slots\n\nWhen 1 or more reserved slots are set, the lobby will be marked as 'full' for players who try to log into the server under a different user group if it would fill up all session slots.\n\nThis allows, for example, Admins or Friends to join even if there is a high demand for slots by 'Guests'.\n\n - Minimum: `0`\n\n - Maximum: `16`\n\nDefault: `0`",
+                        "default": 0,
+                        "minimum": 0,
+                        "maximum": 16
+                    }
+                },
+                "additionalProperties": false,
+                "required": [
+                    "name",
+                    "canKickBan",
+                    "canAccessInventories",
+                    "canEditBase",
+                    "canExtendBase",
+                    "reservedSlots"
+                ]
+            }
+        }
+    },
+    "additionalProperties": false,
+    "required": [
+        "name",
+        "saveDirectory",
+        "logDirectory",
+        "ip",
+        "queryPort",
+        "slotCount",
+        "voiceChatMode",
+        "enableVoiceChat",
+        "enableTextChat",
+        "gameSettingsPreset",
+        "gameSettings",
+        "userGroups"
+    ],
+    "allOf": [
+        {
+            "if": {
+                "properties": {
+                    "gameSettings": {
+                        "properties": {
+                            "playerHealthFactor": {
+                                "not": {
+                                    "const": 1
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "gameSettingsPreset": {
+                        "const": "Custom"
+                    }
+                }
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "gameSettings": {
+                        "properties": {
+                            "playerManaFactor": {
+                                "not": {
+                                    "const": 1
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "gameSettingsPreset": {
+                        "const": "Custom"
+                    }
+                }
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "gameSettings": {
+                        "properties": {
+                            "playerStaminaFactor": {
+                                "not": {
+                                    "const": 1
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "gameSettingsPreset": {
+                        "const": "Custom"
+                    }
+                }
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "gameSettings": {
+                        "properties": {
+                            "playerBodyHeatFactor": {
+                                "not": {
+                                    "const": 1
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "gameSettingsPreset": {
+                        "const": "Custom"
+                    }
+                }
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "gameSettings": {
+                        "properties": {
+                            "enableDurability": {
+                                "not": {
+                                    "const": true
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "gameSettingsPreset": {
+                        "const": "Custom"
+                    }
+                }
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "gameSettings": {
+                        "properties": {
+                            "enableStarvingDebuff": {
+                                "not": {
+                                    "const": false
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "gameSettingsPreset": {
+                        "const": "Custom"
+                    }
+                }
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "gameSettings": {
+                        "properties": {
+                            "foodBuffDurationFactor": {
+                                "not": {
+                                    "const": 1
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "gameSettingsPreset": {
+                        "const": "Custom"
+                    }
+                }
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "gameSettings": {
+                        "properties": {
+                            "fromHungerToStarving": {
+                                "not": {
+                                    "const": 600000000000
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "gameSettingsPreset": {
+                        "const": "Custom"
+                    }
+                }
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "gameSettings": {
+                        "properties": {
+                            "shroudTimeFactor": {
+                                "not": {
+                                    "const": 1
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "gameSettingsPreset": {
+                        "const": "Custom"
+                    }
+                }
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "gameSettings": {
+                        "properties": {
+                            "tombstoneMode": {
+                                "not": {
+                                    "const": "AddBackpackMaterials"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "gameSettingsPreset": {
+                        "const": "Custom"
+                    }
+                }
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "gameSettings": {
+                        "properties": {
+                            "enableGliderTurbulences": {
+                                "not": {
+                                    "const": true
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "gameSettingsPreset": {
+                        "const": "Custom"
+                    }
+                }
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "gameSettings": {
+                        "properties": {
+                            "weatherFrequency": {
+                                "not": {
+                                    "const": "Normal"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "gameSettingsPreset": {
+                        "const": "Custom"
+                    }
+                }
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "gameSettings": {
+                        "properties": {
+                            "miningDamageFactor": {
+                                "not": {
+                                    "const": 1
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "gameSettingsPreset": {
+                        "const": "Custom"
+                    }
+                }
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "gameSettings": {
+                        "properties": {
+                            "plantGrowthSpeedFactor": {
+                                "not": {
+                                    "const": 1
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "gameSettingsPreset": {
+                        "const": "Custom"
+                    }
+                }
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "gameSettings": {
+                        "properties": {
+                            "resourceDropStackAmountFactor": {
+                                "not": {
+                                    "const": 1
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "gameSettingsPreset": {
+                        "const": "Custom"
+                    }
+                }
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "gameSettings": {
+                        "properties": {
+                            "factoryProductionSpeedFactor": {
+                                "not": {
+                                    "const": 1
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "gameSettingsPreset": {
+                        "const": "Custom"
+                    }
+                }
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "gameSettings": {
+                        "properties": {
+                            "perkUpgradeRecyclingFactor": {
+                                "not": {
+                                    "const": 0.5
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "gameSettingsPreset": {
+                        "const": "Custom"
+                    }
+                }
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "gameSettings": {
+                        "properties": {
+                            "perkCostFactor": {
+                                "not": {
+                                    "const": 1
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "gameSettingsPreset": {
+                        "const": "Custom"
+                    }
+                }
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "gameSettings": {
+                        "properties": {
+                            "experienceCombatFactor": {
+                                "not": {
+                                    "const": 1
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "gameSettingsPreset": {
+                        "const": "Custom"
+                    }
+                }
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "gameSettings": {
+                        "properties": {
+                            "experienceMiningFactor": {
+                                "not": {
+                                    "const": 1
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "gameSettingsPreset": {
+                        "const": "Custom"
+                    }
+                }
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "gameSettings": {
+                        "properties": {
+                            "experienceExplorationQuestsFactor": {
+                                "not": {
+                                    "const": 1
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "gameSettingsPreset": {
+                        "const": "Custom"
+                    }
+                }
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "gameSettings": {
+                        "properties": {
+                            "randomSpawnerAmount": {
+                                "not": {
+                                    "const": "Normal"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "gameSettingsPreset": {
+                        "const": "Custom"
+                    }
+                }
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "gameSettings": {
+                        "properties": {
+                            "aggroPoolAmount": {
+                                "not": {
+                                    "const": "Normal"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "gameSettingsPreset": {
+                        "const": "Custom"
+                    }
+                }
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "gameSettings": {
+                        "properties": {
+                            "enemyDamageFactor": {
+                                "not": {
+                                    "const": 1
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "gameSettingsPreset": {
+                        "const": "Custom"
+                    }
+                }
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "gameSettings": {
+                        "properties": {
+                            "enemyHealthFactor": {
+                                "not": {
+                                    "const": 1
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "gameSettingsPreset": {
+                        "const": "Custom"
+                    }
+                }
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "gameSettings": {
+                        "properties": {
+                            "enemyStaminaFactor": {
+                                "not": {
+                                    "const": 1
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "gameSettingsPreset": {
+                        "const": "Custom"
+                    }
+                }
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "gameSettings": {
+                        "properties": {
+                            "enemyPerceptionRangeFactor": {
+                                "not": {
+                                    "const": 1
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "gameSettingsPreset": {
+                        "const": "Custom"
+                    }
+                }
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "gameSettings": {
+                        "properties": {
+                            "bossDamageFactor": {
+                                "not": {
+                                    "const": 1
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "gameSettingsPreset": {
+                        "const": "Custom"
+                    }
+                }
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "gameSettings": {
+                        "properties": {
+                            "bossHealthFactor": {
+                                "not": {
+                                    "const": 1
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "gameSettingsPreset": {
+                        "const": "Custom"
+                    }
+                }
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "gameSettings": {
+                        "properties": {
+                            "threatBonus": {
+                                "not": {
+                                    "const": 1
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "gameSettingsPreset": {
+                        "const": "Custom"
+                    }
+                }
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "gameSettings": {
+                        "properties": {
+                            "pacifyAllEnemies": {
+                                "not": {
+                                    "const": false
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "gameSettingsPreset": {
+                        "const": "Custom"
+                    }
+                }
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "gameSettings": {
+                        "properties": {
+                            "tamingStartleRepercussion": {
+                                "not": {
+                                    "const": "LoseSomeProgress"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "gameSettingsPreset": {
+                        "const": "Custom"
+                    }
+                }
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "gameSettings": {
+                        "properties": {
+                            "dayTimeDuration": {
+                                "not": {
+                                    "const": 1800000000000
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "gameSettingsPreset": {
+                        "const": "Custom"
+                    }
+                }
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "gameSettings": {
+                        "properties": {
+                            "nightTimeDuration": {
+                                "not": {
+                                    "const": 720000000000
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "gameSettingsPreset": {
+                        "const": "Custom"
+                    }
+                }
+            }
+        }
+    ]
+}

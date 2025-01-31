@@ -1,0 +1,53 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+  font-family: system-ui, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, Helvetica, Arial, "Helvetica Neue", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: large;
+}
+
+kbd {
+  background-color: #f0f0f0;
+  color: #1e1e1e;
+  padding: 3px 6px;
+  border-radius: 4px;
+}
+
+code {
+  background-color: #222b35;
+  padding: 3px 6px;
+  border-radius: 4px;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: auto 1fr;
+  height: 100vh;
+  gap: 16px;
+}
+
+.instructions {
+  padding: 16px;
+}
+
+.editor {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+@media (max-width: 992px) {
+  .container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    height: auto;
+  }
+
+  .editor {
+    min-height: 50vh;
+  }
+}
