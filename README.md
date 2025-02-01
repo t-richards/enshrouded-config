@@ -16,20 +16,6 @@ This is a web tool for editing and validating the configuration file for Enshrou
 
 Visit https://enshrouded-config.tomrichards.dev/ to validate your server configuration!
 
-## Contributing
-
-Requirements:
-
- - Node.js `22.x` with NPM
- - [Overmind](https://github.com/DarthSim/overmind)
-
-```bash
-# Install deps
-npm install
-
-# Start the local server on http://localhost:8080/
-bin/dev
-```
 
 ## Disclaimer
 
