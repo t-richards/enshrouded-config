@@ -12,10 +12,9 @@ This is a web tool for editing and validating the configuration file for Enshrou
 
 :white_check_mark: No ads, tracking, or similar nonsense.
 
-## Getting Started
+## Get Started
 
-Visit https://enshrouded-config.tomrichards.dev/ to validate your server configuration!
-
+Visit https://enshrouded-config.tomrichards.dev to craft and refine your config.
 
 ## Disclaimer
 
