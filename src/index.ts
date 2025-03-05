@@ -47,4 +47,37 @@ const startMonaco = () => {
     })
 }
 
+// Saves the current editor value as a file when the user presses Ctrl+S.
+const handleSave = (event: KeyboardEvent) => {
+    if (!(event.ctrlKey || event.metaKey) || event.key.toLowerCase() !== 's') {
+        return
+    }
+
+    event.preventDefault()
+
+    // Warn the user when their current file contains errors.
+    const markers = monaco.editor.getModelMarkers({})
+    if (markers.length > 0) {
+        const message = 'Your current file contains errors. Are you sure you want to save?'
+        if (!window.confirm(message)) {
+            return
+        }
+    }
+
+    // Export the current editor value as a file.
+    const editor = monaco.editor.getModels()[0]
+    const value = editor.getValue()
+    const blob = new Blob([value], { type: 'application/json' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = 'enshrouded_server.json'
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+    URL.revokeObjectURL(url)
+}
+
+
 startMonaco()
+document.addEventListener('keydown', handleSave)
