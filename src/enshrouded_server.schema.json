@@ -417,6 +417,7 @@
         "userGroups": {
             "type": "array",
             "markdownDescription": "#### User Groups\n\n---\n\nA list of user groups with their permissions and settings.",
+            "minItems": 1,
             "items": {
                 "type": "object",
                 "properties": {
