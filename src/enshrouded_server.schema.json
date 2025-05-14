@@ -375,6 +375,21 @@
                     "default": 720000000000,
                     "minimum": 120000000000,
                     "maximum": 3600000000000
+                },
+                "curseModifier": {
+                    "type": "string",
+                    "markdownDescription": "#### Curse Modifier\n\n---\n\nThis setting allows switching the Shroud curse off or modifying the chance for receiving the curse when being attacked by the corresponding enemies.\n\n - `\"Easy\"`: Turns the feature off.\n\n - `\"Normal\"`: Normal chance of receiving the curse.\n\n - `\"Hard\"`: Doubles the chance of receiving the curse.\n\nDefault: `Normal`",
+                    "default": "Normal",
+                    "enum": [
+                        "Easy",
+                        "Normal",
+                        "Hard"
+                    ],
+                    "markdownEnumDescriptions": [
+                        "Turns the feature off.",
+                        "Normal chance of receiving the curse.",
+                        "Doubles the chance of receiving the curse."
+                    ]
                 }
             },
             "required": [
@@ -411,7 +426,8 @@
                 "pacifyAllEnemies",
                 "tamingStartleRepercussion",
                 "dayTimeDuration",
-                "nightTimeDuration"
+                "nightTimeDuration",
+                "curseModifier"
             ]
         },
         "userGroups": {
