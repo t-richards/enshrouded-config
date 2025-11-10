@@ -43,6 +43,14 @@
             "minimum": 1,
             "maximum": 16
         },
+        "tags": {
+            "type": "array",
+            "markdownDescription": "#### Server Tags\n\n---\n\nA list of tags to describe the server in the server browser.\n\n - Example: `[\"Exploration\", \"Hardcore\"]`",
+            "items": {
+                "type": "string"
+            },
+            "default": []
+        },
         "voiceChatMode": {
             "type": "string",
             "markdownDescription": "#### Voice Chat Mode\n\n---\n\nMode of voice chat communication.\n\nOptions:\n\n - `\"Proximity\"` - Only players near each other can hear voice chat.\n\n - `\"Global\"` - All players can hear voice chat regardless of distance.\n\nDefault: `\"Proximity\"`\n\nCurrent Setting:",
@@ -127,6 +135,13 @@
                         "High",
                         "Max"
                     ]
+                },
+                "playerDivingTimeFactor": {
+                    "type": "number",
+                    "markdownDescription": "#### Diving Time\n\n---\n\nModifies the initial amount of oxygen for players and therefore the time available underwater.\n\n - Minimum: `0.5`\n\n - Maximum: `2`\n\nDefault: `1`",
+                    "default": 1,
+                    "minimum": 0.5,
+                    "maximum": 2
                 },
                 "enableDurability": {
                     "type": "boolean",
@@ -390,6 +405,25 @@
                         "Normal chance of receiving the curse.",
                         "Doubles the chance of receiving the curse."
                     ]
+                },
+                "fishingDifficulty": {
+                    "type": "string",
+                    "markdownDescription": "#### Fishing Difficulty\n\n---\n\nThis setting defines the strength of the fish during the fishing minigame. The stronger a fish is, the longer the minigame will proceed.\n\nDefault: `Normal`",
+                    "default": "Normal",
+                    "enum": [
+                        "VeryEasy",
+                        "Easy",
+                        "Normal",
+                        "Hard",
+                        "VeryHard"
+                    ],
+                    "markdownEnumDescriptions": [
+                        "Very Easy",
+                        "Easy",
+                        "Normal",
+                        "Hard",
+                        "Very Hard"
+                    ]
                 }
             },
             "required": [
@@ -397,6 +431,7 @@
                 "playerManaFactor",
                 "playerStaminaFactor",
                 "playerBodyHeatFactor",
+                "playerDivingTimeFactor",
                 "enableDurability",
                 "enableStarvingDebuff",
                 "foodBuffDurationFactor",
@@ -427,7 +462,8 @@
                 "tamingStartleRepercussion",
                 "dayTimeDuration",
                 "nightTimeDuration",
-                "curseModifier"
+                "curseModifier",
+                "fishingDifficulty"
             ]
         },
         "userGroups": {
@@ -456,6 +492,11 @@
                         "markdownDescription": "#### Inventory Access\n\nWhen `true`, users in this group can access chests and other containers.\n\nDefault: `false`",
                         "default": false
                     },
+                    "canEditWorld": {
+                        "type": "boolean",
+                        "markdownDescription": "#### World Editing\n\nWhen `true`, users in this group can destroy terrain and objects outside of build areas.\n\nDefault: `false`",
+                        "default": false
+                    },
                     "canEditBase": {
                         "type": "boolean",
                         "markdownDescription": "#### Base Building\n\nWhen `true`, users in this group can build add/remove blocks, add/remove props, and terraform within build areas.\n\nDefault: `false`",
@@ -479,11 +520,21 @@
                     "name",
                     "canKickBan",
                     "canAccessInventories",
+                    "canEditWorld",
                     "canEditBase",
                     "canExtendBase",
                     "reservedSlots"
                 ]
             }
+        },
+        "bans": {
+            "type": "array",
+            "markdownDescription": "#### Banned Users\n\n---\n\nA list of banned users by their unique user ID.",
+            "items": {
+                "type": "string",
+                "markdownDescription": "#### User ID\n\nThe unique user ID of the banned user."
+            },
+            "default": []
         }
     },
     "additionalProperties": false,
@@ -494,12 +545,14 @@
         "ip",
         "queryPort",
         "slotCount",
+        "tags",
         "voiceChatMode",
         "enableVoiceChat",
         "enableTextChat",
         "gameSettingsPreset",
         "gameSettings",
-        "userGroups"
+        "userGroups",
+        "bans"
     ],
     "allOf": [
         {
