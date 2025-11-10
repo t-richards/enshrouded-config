@@ -10,12 +10,8 @@ import { readFile, writeFile } from 'fs/promises'
 import { fileURLToPath } from 'url'
 import { dirname, join } from 'path'
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
-const srcDir = join(__dirname, '..', 'src')
-
-const SCHEMA_PATH = join(srcDir, 'enshrouded_server.schema.json')
-const EXAMPLE_PATH = join(srcDir, 'enshrouded_server.json')
+const SCHEMA_PATH = 'src/enshrouded_server.schema.json'
+const EXAMPLE_PATH = 'src/enshrouded_server.json'
 
 /**
  * Reads and parses a JSON file

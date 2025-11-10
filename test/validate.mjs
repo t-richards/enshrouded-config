@@ -9,8 +9,8 @@
 import { Validator } from '@cfworker/json-schema'
 import { readFile } from 'fs/promises'
 
-const schema = JSON.parse(await readFile('./src/enshrouded_server.schema.json', 'utf8'))
-const example = JSON.parse(await readFile('./src/enshrouded_server.json', 'utf8'))
+const schema = JSON.parse(await readFile('src/enshrouded_server.schema.json', 'utf8'))
+const example = JSON.parse(await readFile('src/enshrouded_server.json', 'utf8'))
 
 const shortCircuit = false
 const draft = '2020-12'

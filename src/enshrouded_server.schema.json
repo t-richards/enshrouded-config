@@ -242,7 +242,7 @@
                 "perkUpgradeRecyclingFactor": {
                     "type": "number",
                     "markdownDescription": "#### Weapon Salvage Modifier\n\n---\n\nScales the amount of Runes that are returned to you when salvaging upgraded weapons.\n\nIn-game, the factor is represented by a percentage.\n\n - Minimum: `0.25`\n\n - Maximum: `2`\n\nDefault: `0.5`",
-                    "default": 0.500000,
+                    "default": 0.5,
                     "minimum": 0,
                     "maximum": 1
                 },
