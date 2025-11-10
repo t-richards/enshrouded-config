@@ -648,6 +648,28 @@
                 "properties": {
                     "gameSettings": {
                         "properties": {
+                            "playerDivingTimeFactor": {
+                                "not": {
+                                    "const": 1
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "gameSettingsPreset": {
+                        "const": "Custom"
+                    }
+                }
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "gameSettings": {
+                        "properties": {
                             "enableDurability": {
                                 "not": {
                                     "const": true
@@ -1289,6 +1311,50 @@
                             "nightTimeDuration": {
                                 "not": {
                                     "const": 720000000000
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "gameSettingsPreset": {
+                        "const": "Custom"
+                    }
+                }
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "gameSettings": {
+                        "properties": {
+                            "curseModifier": {
+                                "not": {
+                                    "const": "Normal"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "gameSettingsPreset": {
+                        "const": "Custom"
+                    }
+                }
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "gameSettings": {
+                        "properties": {
+                            "fishingDifficulty": {
+                                "not": {
+                                    "const": "Normal"
                                 }
                             }
                         }
