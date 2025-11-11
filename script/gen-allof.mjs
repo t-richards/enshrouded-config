@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+// @ts-check
+
 /**
  * Generates the `allOf` section of the JSON schema to enforce that when any
  * gameSettings property differs from its default value, the gameSettingsPreset
@@ -7,14 +9,14 @@
  */
 
 import { readFile, writeFile } from 'fs/promises'
-import { fileURLToPath } from 'url'
-import { dirname, join } from 'path'
 
 const SCHEMA_PATH = 'src/enshrouded_server.schema.json'
 const EXAMPLE_PATH = 'src/enshrouded_server.json'
 
 /**
- * Reads and parses a JSON file
+ * Reads and parses a JSON file.
+ * 
+ * @param {string} path - The file path to read.
  */
 async function readJSON(path) {
     const content = await readFile(path, 'utf-8')
@@ -22,7 +24,10 @@ async function readJSON(path) {
 }
 
 /**
- * Generates an if/then rule for a single property
+ * Generates an if/then rule for a single property.
+ * 
+ * @param {string} propertyName - The name of the property.
+ * @param {*} defaultValue - The default value to compare against.
  */
 function generateRule(propertyName, defaultValue) {
     return {
