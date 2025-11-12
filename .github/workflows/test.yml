@@ -27,4 +27,4 @@ jobs:
         run: bun test
 
       - name: Check types
-        run: bun run tsc:dev
+        run: bun run tsc
