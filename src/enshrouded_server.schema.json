@@ -527,7 +527,7 @@
                 ]
             }
         },
-        "bans": {
+        "bannedAccounts": {
             "type": "array",
             "markdownDescription": "#### Banned Users\n\n---\n\nA list of banned users by their unique user ID.",
             "items": {
@@ -552,7 +552,7 @@
         "gameSettingsPreset",
         "gameSettings",
         "userGroups",
-        "bans"
+        "bannedAccounts"
     ],
     "allOf": [
         {

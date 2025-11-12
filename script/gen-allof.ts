@@ -1,6 +1,4 @@
-#!/usr/bin/env node
-
-// @ts-check
+#!/usr/bin/env bun
 
 /**
  * Generates the `allOf` section of the JSON schema to enforce that when any
@@ -14,22 +12,17 @@ const SCHEMA_PATH = 'src/enshrouded_server.schema.json'
 const EXAMPLE_PATH = 'src/enshrouded_server.json'
 
 /**
- * Reads and parses a JSON file.
- * 
- * @param {string} path - The file path to read.
+ * Reads and parses a JSON file
  */
-async function readJSON(path) {
+async function readJSON(path: string): Promise<any> {
     const content = await readFile(path, 'utf-8')
     return JSON.parse(content)
 }
 
 /**
- * Generates an if/then rule for a single property.
- * 
- * @param {string} propertyName - The name of the property.
- * @param {*} defaultValue - The default value to compare against.
+ * Generates an if/then rule for a single property
  */
-function generateRule(propertyName, defaultValue) {
+function generateRule(propertyName: string, defaultValue: any) {
     return {
         if: {
             properties: {
@@ -81,8 +74,8 @@ async function main() {
         }
 
         // Update schema default to match example if different
-        if (propSchema.default !== exampleValue) {
-            propSchema.default = exampleValue
+        if ((propSchema as any).default !== exampleValue) {
+            (propSchema as any).default = exampleValue
         }
 
         // Generate the rule using example value as default

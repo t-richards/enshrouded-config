@@ -4,12 +4,12 @@ How to propose changes to the project.
 
 ## Development environment setup
 
- - Node.js `22.x` with NPM
+ - [Bun](https://bun.com/) `>= 1.3.1`
  - [Overmind](https://github.com/DarthSim/overmind)
 
 ```bash
 # Install dependencies
-npm install
+bun install
 
 # Start the local server on http://localhost:8080/
 bin/dev

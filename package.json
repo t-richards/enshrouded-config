@@ -2,19 +2,15 @@
   "name": "enshrouded-config",
   "private": true,
   "scripts": {
-    "build": "node script/build.mjs",
-    "dev": "node script/dev.mjs",
-    "tsc": "tsc --project tsconfig.json",
-    "tsc:dev": "tsc --project tsconfig.json --watch --preserveWatchOutput",
-    "test": "node test/validate.mjs"
+    "build": "bun run script/build.ts",
+    "dev": "bun run script/dev.ts",
+    "tsc:dev": "tsc --watch"
   },
   "dependencies": {
     "monaco-editor": "^0.54"
   },
   "devDependencies": {
     "@cfworker/json-schema": "^4.1",
-    "@types/node": "^22.19",
-    "esbuild": "^0.27",
-    "typescript": "^5.9"
+    "@types/bun": "latest"
   }
 }
