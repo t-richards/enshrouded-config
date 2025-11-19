@@ -22,7 +22,7 @@ const monacoFiles: Bun.BuildConfig = {
         '.ttf': 'file'
     },
     naming: '[dir]/monaco-editor.[ext]',
-    outdir: "dist"
+    outdir: 'dist'
 }
 
 const monacoWorkers: Bun.BuildConfig = {

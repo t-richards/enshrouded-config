@@ -13,11 +13,11 @@ console.log('Starting dev server on http://localhost:4000/')
 Bun.serve({
     port: 4000,
     routes: {
-        "/": async () => {
+        '/': async () => {
             await build()
             return new Response(Bun.file('dist/index.html'))
         },
-        "/*": async (req) => {
+        '/*': async (req) => {
             const reqPath = new URL(req.url).pathname
             const filePath = join('dist', reqPath)
             return new Response(Bun.file(filePath))

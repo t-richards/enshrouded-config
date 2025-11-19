@@ -3,7 +3,7 @@
 /**
  * Generates the `allOf` section of the JSON schema to enforce that when any
  * gameSettings property differs from its default value, the gameSettingsPreset
- * must be set to "Custom".
+ * must be set to 'Custom'.
  */
 
 import { readFile, writeFile } from 'fs/promises'
@@ -40,7 +40,7 @@ function generateRule(propertyName: string, defaultValue: any) {
         then: {
             properties: {
                 gameSettingsPreset: {
-                    const: "Custom"
+                    const: 'Custom'
                 }
             }
         }
