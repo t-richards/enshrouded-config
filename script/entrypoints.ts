@@ -1,3 +1,5 @@
+import { readFile, writeFile } from 'fs/promises'
+
 const workerEntryPoints = [
     'vs/language/json/json.worker.js',
     'vs/editor/editor.worker.js'
@@ -31,8 +33,16 @@ const monacoWorkers: Bun.BuildConfig = {
     outdir: 'dist/vs'
 }
 
+const buildSchema = async () => {
+    const rawFile = await readFile('src/enshrouded_server.schema.json')
+    const schema = JSON.parse(rawFile.toString())
+    const minifiedSchema = JSON.stringify(schema)
+    await writeFile('dist/enshrouded_server.schema.json', minifiedSchema)
+}
+
 export {
     mainFiles,
     monacoFiles,
-    monacoWorkers
+    monacoWorkers,
+    buildSchema
 }

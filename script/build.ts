@@ -1,17 +1,9 @@
-import { readFile, writeFile } from 'fs/promises'
-import { mainFiles, monacoFiles, monacoWorkers } from './entrypoints'
+import { buildSchema, mainFiles, monacoFiles, monacoWorkers } from './entrypoints'
 
-console.log('Building main files...')
-await Bun.build({ ...mainFiles, minify: true })
-
-console.log('Building monaco files...')
-await Bun.build({ ...monacoFiles, minify: true })
-
-console.log('Building monaco workers...')
-await Bun.build({ ...monacoWorkers, minify: true })
-
-console.log('Building schema file...')
-const rawFile = await readFile('src/enshrouded_server.schema.json')
-const schema = JSON.parse(rawFile.toString())
-const minifiedSchema = JSON.stringify(schema)
-await writeFile('dist/enshrouded_server.schema.json', minifiedSchema)
+console.log('Building files...')
+await Promise.all([
+    Bun.build({ ...mainFiles, minify: true, throw: true }),
+    Bun.build({ ...monacoFiles, minify: true, throw: true }),
+    Bun.build({ ...monacoWorkers, minify: true, throw: true }),
+    buildSchema()
+])

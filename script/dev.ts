@@ -1,20 +1,21 @@
 import { join } from 'path'
-import { mainFiles, monacoFiles, monacoWorkers } from './entrypoints'
+import { buildSchema, mainFiles, monacoFiles, monacoWorkers } from './entrypoints'
 
-const build = async () => {
-    await Bun.build({ ...mainFiles, sourcemap: 'linked' })
-    await Bun.build({ ...monacoFiles, sourcemap: 'linked' })
-    await Bun.build({ ...monacoWorkers, sourcemap: 'linked' })
-}
+const build = Promise.all([
+    Bun.build({ ...mainFiles, sourcemap: 'linked' }),
+    Bun.build({ ...monacoFiles, sourcemap: 'linked' }),
+    Bun.build({ ...monacoWorkers, sourcemap: 'linked' }),
+    buildSchema()
+])
 
-await build()
+await build
 
 console.log('Starting dev server on http://localhost:4000/')
 Bun.serve({
     port: 4000,
     routes: {
         '/': async () => {
-            await build()
+            await build
             return new Response(Bun.file('dist/index.html'))
         },
         '/*': async (req) => {
