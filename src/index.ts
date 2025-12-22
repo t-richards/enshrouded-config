@@ -12,7 +12,7 @@ self.MonacoEnvironment = {
     }
 }
 
-monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
+monaco.json.jsonDefaults.setDiagnosticsOptions({
     validate: true,
     enableSchemaRequest: false,
     schemaValidation: 'error',

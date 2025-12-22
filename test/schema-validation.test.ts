@@ -1,4 +1,3 @@
-
 // As a quick sanity check, we validate the example configuration file against our custom schema.
 // This test uses a separate JSON schema validator because the monaco-editor package does
 // not expose the API for validating JSON schemas.
