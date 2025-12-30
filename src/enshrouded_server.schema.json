@@ -529,10 +529,43 @@
         },
         "bannedAccounts": {
             "type": "array",
-            "markdownDescription": "#### Banned Users\n\n---\n\nA list of banned users by their unique user ID.",
+            "markdownDescription": "#### Banned Users\n\n---\n\nA list of banned user entries with account details and ban information.",
             "items": {
-                "type": "string",
-                "markdownDescription": "#### User ID\n\nThe unique user ID of the banned user."
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                    "accountId",
+                    "displayName",
+                    "characterName",
+                    "banDate"
+                ],
+                "properties": {
+                    "accountId": {
+                        "type": "integer",
+                        "markdownDescription": "#### Account ID\n\nA custom 64-bit hash (FNV-1a) representing the player's Steam account."
+                    },
+                    "displayName": {
+                        "type": "string",
+                        "markdownDescription": "#### Display Name\n\nThe player's Steam account name."
+                    },
+                    "characterName": {
+                        "type": "string",
+                        "markdownDescription": "#### Character Name\n\nThe player's in-game character name."
+                    },
+                    "banDate": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                            "value"
+                        ],
+                        "properties": {
+                            "value": {
+                                "type": "integer",
+                                "markdownDescription": "#### Ban Date Value\n\nUnix timestamp (seconds) when the ban was applied."
+                            }
+                        }
+                    }
+                }
             },
             "default": []
         }
