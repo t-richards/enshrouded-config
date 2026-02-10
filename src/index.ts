@@ -59,7 +59,7 @@ const handleSave = (event: KeyboardEvent) => {
     const markers = monaco.editor.getModelMarkers({})
     if (markers.length > 0) {
         const message = 'Your current file contains errors. Are you sure you want to save?'
-        if (!window.confirm(message)) {
+        if (!globalThis.confirm(message)) {
             return
         }
     }
