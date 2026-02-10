@@ -3,7 +3,7 @@ import * as monaco from 'monaco-editor'
 import schema from './enshrouded_server.schema.json'
 import sampleConfig from './enshrouded_server.json'
 
-self.MonacoEnvironment = {
+globalThis.MonacoEnvironment = {
     getWorkerUrl: function (_moduleId, label) {
         if (label === 'json') {
             return './vs/language/json/json.worker.js'
@@ -74,7 +74,7 @@ const handleSave = (event: KeyboardEvent) => {
     a.download = 'enshrouded_server.json'
     document.body.appendChild(a)
     a.click()
-    document.body.removeChild(a)
+    a.remove()
     URL.revokeObjectURL(url)
 }
 

@@ -3,7 +3,7 @@
 // not expose the API for validating JSON schemas.
 
 import { Validator } from '@cfworker/json-schema'
-import { readFile } from 'fs/promises'
+import { readFile } from 'node:fs/promises'
 
 import { describe, it, expect } from 'bun:test'
 

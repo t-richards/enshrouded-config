@@ -1,4 +1,4 @@
-import { join } from 'path'
+import { join } from 'node:path'
 import { buildSchema, mainFiles, monacoFiles, monacoWorkers } from './entrypoints'
 
 const build = Promise.all([

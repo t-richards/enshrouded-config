@@ -6,7 +6,7 @@
  * must be set to 'Custom'.
  */
 
-import { readFile, writeFile } from 'fs/promises'
+import { readFile, writeFile } from 'node:fs/promises'
 
 const SCHEMA_PATH = 'src/enshrouded_server.schema.json'
 const EXAMPLE_PATH = 'src/enshrouded_server.json'
@@ -92,7 +92,4 @@ async function main() {
     console.log(`Generated ${rules.length} rules`)
 }
 
-main().catch(error => {
-    console.error('FATAL:', error.message)
-    process.exit(1)
-})
+await main()
