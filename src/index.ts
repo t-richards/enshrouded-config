@@ -25,17 +25,10 @@ monaco.json.jsonDefaults.setDiagnosticsOptions({
     ],
 })
 
-class ContainerNotFoundError extends Error {
-    constructor(message: string) {
-        super(message)
-        this.name = 'ContainerNotFoundError'
-    }
-}
-
 const startMonaco = () => {
     const container = document.getElementById('editor')
     if (!container) {
-        throw new ContainerNotFoundError('Cannot start editor.')
+        throw new Error('Cannot start editor.')
     }
 
     monaco.editor.create(container, {
@@ -66,6 +59,10 @@ const handleSave = (event: KeyboardEvent) => {
 
     // Export the current editor value as a file.
     const editor = monaco.editor.getModels()[0]
+    if (!editor) {
+        throw new Error('No editor model found.')
+    }
+
     const value = editor.getValue()
     const blob = new Blob([value], { type: 'application/json' })
     const url = URL.createObjectURL(blob)
